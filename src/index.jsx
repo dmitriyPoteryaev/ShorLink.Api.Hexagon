@@ -4,11 +4,10 @@ import App from './App.jsx';
 
 
 ReactDOM.render(
-    <Provider store={store}>
+ 
        
     <App />
-   
-    </Provider>
+
     ,
  
 document.getElementById('root')
