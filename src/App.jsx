@@ -1,6 +1,7 @@
 import React from "react";
-import Greeting_Validator from "./pages/Greeting_Validator/Greeting_Validator.jsx";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import Register_Validator from "./pages/Register_Validator/Register_Validator.jsx";
+import Login_Validator from "./pages/Login_Validator/Login_Validator.jsx";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "../style/style.css";
 // //      <BrowserRouter>
 //       {/* <Navbar/> */}
@@ -16,8 +17,16 @@ function App() {
     return (
 
 <div className="App">
+<BrowserRouter>
+       <Routes>
 
- <Greeting_Validator/>
+       <Route path="/register" element={<Register_Validator />} />
+       <Route path="/login" element={<Login_Validator />} />
+       
+       <Route path="*" element={<Register_Validator />} />
+     </Routes>
+   </BrowserRouter>
+
  
       </div>
 
