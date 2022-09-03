@@ -49,12 +49,12 @@ module.exports = {
       },
     //  optimization: optimization(),
       devServer: {
-        // чтобы не было not Get beer/1  
+        // чтобы не было not Get 
         historyApiFallback: true,
         // static: "./",
-        port: 4200,
+        port: 3020,
         //для Post-запросов, чтобы страница не перезагружалась
-        liveReload: false
+        // liveReload: false
       },
    
       plugins: [

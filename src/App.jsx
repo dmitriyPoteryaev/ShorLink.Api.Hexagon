@@ -20,8 +20,10 @@ function App() {
 <BrowserRouter>
        <Routes>
 
-       <Route path="/register" element={<Register_Validator />} />
-       <Route path="/login" element={<Login_Validator />} />
+       <Route path="/register" element={<Register_Validator/>} />
+       <Route path="/login" element={<Login_Validator/>} />
+       {/* /?login=fewfef&pass=wefewfewf */}
+    
        
        <Route path="*" element={<Register_Validator />} />
      </Routes>

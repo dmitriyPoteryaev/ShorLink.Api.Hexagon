@@ -29,8 +29,11 @@
   }
   
   .NextPage {
-    margin: 30px 50px 30px 50px;
+    text-decoration: none;
+    margin: 20px 50px 20px 50px;
     width: 100%;
+    text-align: center;
+    padding-top: 5px;
     border-radius: 3px;
     height: 40px;
     cursor: pointer;
@@ -75,6 +78,38 @@
           .nameInput{
             font-weight: 800;
   
+          }
+          .ready {
+            /* font-family: "PT Sans", sans-serif; */
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            margin-right: 10px;
+          }
+          .btn_reading{
+            text-decoration: none;
+            font-family: "PT Sans", sans-serif;
+            background-color:  #F4C430;
+            margin-bottom: 10px;
+            font-weight: 400;
+            color: white;
+            cursor: pointer;
+            border-radius:  3px;
+            padding:5px;
+            border: white 3px solid;
+           
+           
+          }
+          .error, .error_active{
+
+            display: none;
+           
+            font-weight: 800;
+          }
+          .error_active{
+          color:  red;
+            display: flex;
           }
   
   

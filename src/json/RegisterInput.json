@@ -1,0 +1,17 @@
+[
+    {
+      "nameInput": "Username",
+      "type": "text",
+      "placeholder": "Введите любой логин",
+      "name": "login"
+     
+    },
+    {
+        "nameInput": "Password",
+        "type":"password",
+        "placeholder": "Введите любой пароль",
+        "name": "pass"
+     
+    }
+
+  ]

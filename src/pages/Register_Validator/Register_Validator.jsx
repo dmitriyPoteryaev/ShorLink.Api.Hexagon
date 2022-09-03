@@ -1,34 +1,68 @@
 import React, { useState } from "react";
 import classes from "./Register_Validator.module.css";
-import { usePostQuery } from "../../customHooks/usePostQuery.js";
+import { usePostQueryRegister } from "../../customHooks/usePostQueryRegister.js";
 import { useFetching } from "../../customHooks/useFetching.js";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import ModalInput from '../../components/UI/ModalInput/ModalInput'
+import * as RegisterInput from '../../json/RegisterInput.json'
 
 const Register_Validator = () => {
+
+
   const [check, setCheck] = useState(false);
-  const [Logo_Pass, setLogo_Pass] = useState({
-    Logo: "",
-    Pass: "",
-  });
+  const [Login, setLogin] = useState('');
+  const [Pass, setPass] = useState('');
+
+  const [answer, setAnswer] = useState({});
+
 
   const router = useNavigate();
 
-  const [fetching,isLoading,error] =  useFetching ( async() => {
+  const [fetching, isLoading, error] = useFetching(async () => {
+
+    const resulte = await usePostQueryRegister(Login, Pass);
 
 
-    const result = await usePostQuery(Logo_Pass.Logo,Logo_Pass.Pass);
-   
-   
+    setAnswer(resulte)
 
-    console.log('Твой результат в валидаторе',result)
 
-    result.status==200
-    ?
-    router('/login')
-    :
-    console.log('Твой плохой результат',result)
   })
+  if (answer.username) {
 
+    router('/login')
+
+  }
+
+  RegisterInput.default[0].curentValue=Login;
+  RegisterInput.default[0].functionValue=setLogin;
+
+  RegisterInput.default[1].curentValue=Pass;
+  RegisterInput.default[1].functionValue=setPass;
+
+
+
+  // Все инпуты
+  const Register = [
+    {
+      nameInput: 'Username',
+      type: 'text',
+      placeholder: 'Введите любой логин',
+      name: 'login',
+      curentValue: Login,
+      functionValue: setLogin
+    },
+    {
+      nameInput: 'Password',
+      type: 'password',
+      placeholder: 'Введите любой пароль',
+      name: 'pass',
+      curentValue: Pass,
+      functionValue: setPass
+    }
+
+  ]
 
   function TimeAttention() {
     setCheck(true);
@@ -38,67 +72,67 @@ const Register_Validator = () => {
     }, 3000);
   }
 
-  console.log('Твоя ошибка',error)
+  console.log(check,Pass)
 
   return (
-    
-    
-    <div className={classes.Register}>
-      <div className={classes.form}>
-        <span className={classes.DataEntry}>Введите данные для входа</span>
-        <div className={classes.commonInp}>
-          <span className={classes.nameInput}>Логин</span>
-          <div className={classes.inpPlusFig}>
-            <input
-              className={
-                check && !Logo_Pass.Logo.trim()
-                  ? classes.logAttent
-                  : classes.log
-              }
-              type="text"
-              placeholder="Введите любой логин"
-              name="event"
-              onChange={(event) =>
-                setLogo_Pass({ ...Logo_Pass, Logo: event.target.value })
-              }
-            />
-          </div>
-        </div>
-        <div className={classes.commonInp}>
-          <span className={classes.nameInput}>Пароль</span>
-          <div className={classes.inpPlusFig}>
-            <input
-              className={
-                check && !Logo_Pass.Pass.trim()
-                  ? classes.passAttent
-                  : classes.pass
-              }
-              type="password"
-              placeholder="Введите любой пароль"
-              name="event"
-              onChange={(event) =>
-                setLogo_Pass({ ...Logo_Pass, Pass: event.target.value })
-              }
-            />
-          </div>
-        </div>
 
+
+    <div className={classes.Register}>
+
+
+      <form className={classes.form}
+
+        action="#"
+      >
+        <div className={classes.ready}>
+          <Link className={classes.btn_reading}
+            to={'/login'}
+          >Sign In</Link>
+          <Link className={classes.btn_reading} to={'/register'} >Sign Up</Link>
+        </div>
+        <span className={classes.DataEntry}>Register</span>
+        {Register.map((value) => (
+          <ModalInput
+            value={value}
+            check={check}
+            key={value.name}
+          >
+          </ModalInput>
+
+        )
+        )}
+        <div
+          className={
+            error
+              ?
+              classes.error_active
+              :
+              classes.error
+          }
+        >
+          <span
+          >
+            Возможно,Вы уже зарегестрированы
+          </span></div>
         <button
           className={classes.NextPage}
           type="submit"
-          onClick={() =>
-            !!Logo_Pass.Logo.trim() && !!Logo_Pass.Pass.trim()
-              ? 
+          onClick={(event) => {
+            event.preventDefault();
+            !!Login.trim() && !!Pass.trim()
+              ?
               fetching()
 
               : TimeAttention()
-          }
+          }}
         >
-          Войти
+          Execute
         </button>
-      </div>
+
+
+      </form>
     </div>
-  
+
   );
 };
 
