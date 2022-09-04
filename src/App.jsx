@@ -1,16 +1,9 @@
 import React from "react";
+import UserWindow from "./pages/UserWindow/UserWindow.jsx";
 import Register_Validator from "./pages/Register_Validator/Register_Validator.jsx";
 import Login_Validator from "./pages/Login_Validator/Login_Validator.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "../style/style.css";
-// //      <BrowserRouter>
-//       {/* <Navbar/> */}
-//       <Routes>
-//       <Route path="/Greeting" element={<Greeting_Validator />} />
-//       <Route path="*" element={<Greeting_Validator />} />
-//     </Routes>
-//   </BrowserRouter>
-
 
 
 function App() {
@@ -22,8 +15,7 @@ function App() {
 
        <Route path="/register" element={<Register_Validator/>} />
        <Route path="/login" element={<Login_Validator/>} />
-       {/* /?login=fewfef&pass=wefewfewf */}
-    
+       <Route path="/UserWindow" element={<UserWindow/>} />
        
        <Route path="*" element={<Register_Validator />} />
      </Routes>

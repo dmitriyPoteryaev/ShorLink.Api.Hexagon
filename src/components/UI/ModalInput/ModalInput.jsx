@@ -4,25 +4,33 @@ import classes from "./ModalInput.module.css";
 
 
 
-function ModalInput({value,check}) {
+function ModalInput({value,check,onchange,inputValue}) {
 
 
     return (
 
         <div className={classes.commonInp}>
-        <span className={classes.nameInput}>{value.nameInput}</span>
+        <span className={classes.nameInput}>{value.nameInput}
+        </span>
+        <span className={
+          value.required
+          ?
+          classes.required
+          :
+          classes.NoRequired}>*required</span>
         <div className={classes.inpPlusFig}>
           <input
             className={
-              check && !value.curentValue.trim()
+              check && !inputValue.trim()
                 ? classes.logAttent
                 : classes.log
             }
             type={value.type}
+            value={inputValue}
             placeholder={value.placeholder}
             name={value.name}
             onChange={(event) =>
-                value.functionValue(event.target.value)
+                onchange(event.target.value)
             }
           />
         </div>

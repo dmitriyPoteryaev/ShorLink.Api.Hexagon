@@ -3,43 +3,50 @@
       "nameInput": "Grant Type",
       "type": "text",
       "placeholder":"grand type",
-      "name": "grant_type"
+      "name": "Grant_Type",
+      "required":""
      
     },
     {
         "nameInput": "Username",
-        "type": "password",
+        "type": "text",
         "placeholder": "username",
-        "name": "username"
+        "name": "userName",
+        "required":"necessarily"
+        
         
       },
       {
         "nameInput": "Password",
-        "type": "text",
+        "type": "password",
         "placeholder": "password",
-        "name": "pass"
+        "name": "Pass",
+        "required":"necessarily"
         
       },
       
     {
-        "nameInput": "cope",
-        " type": "text",
-        " placeholder": "scope",
-        " name": "scope"
+        "nameInput": "Scope",
+        "type": "text",
+        "placeholder": "scope",
+        "name": "Scope",
+        "required":""
         
       },
       {
         "nameInput": "client_id",
         "type": "text",
         "placeholder": "client id",
-        "name": "client_id"
+        "name": "client_id",
+        "required":""
      
       },
       {
         "nameInput": "client_secret",
         "type": "text",
-        " placeholder": "client secret",
-        "name": "client_secret"
+        "placeholder": "client secret",
+        "name": "client_secret",
+        "required":""
        
       }
 

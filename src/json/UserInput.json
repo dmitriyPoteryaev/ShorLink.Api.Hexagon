@@ -1,0 +1,27 @@
+[
+    {
+      "nameInput": "Link",
+      "type": "text",
+      "placeholder": "Link",
+      "name": "Link",
+      "required":"necessarily"
+     
+    },
+    {
+        "nameInput": "Offset",
+        "type":"number",
+        "placeholder": "Offset",
+        "name": "offset",
+        "required":""
+     
+    },
+    {
+        "nameInput": "Limit",
+        "type":"number",
+        "placeholder": "Limit",
+        "name": "limit",
+        "required":""
+     
+    }
+
+  ]

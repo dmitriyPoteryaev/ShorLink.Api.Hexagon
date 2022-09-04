@@ -1,32 +1,34 @@
 import React, { useState } from "react";
 import classes from "./Register_Validator.module.css";
-import { usePostQueryRegister } from "../../customHooks/usePostQueryRegister.js";
+import { usePostQueryRegister } from "../../API/PostQuery/usePostQueryRegister.js";
 import { useFetching } from "../../customHooks/useFetching.js";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import ModalInput from '../../components/UI/ModalInput/ModalInput'
+import ModalInput from '../../components/UI/ModalInput/ModalInput';
+import ButtonQuery from '../../components/UI/ButtonQuery/ButtonQuery'
 import * as RegisterInput from '../../json/RegisterInput.json'
 
 const Register_Validator = () => {
 
 
   const [check, setCheck] = useState(false);
+  const [RegistrationInfo, setRegistrationInfo] = useState({
+
+userName :'',
+Pass:''
+
+  });
   const [Login, setLogin] = useState('');
   const [Pass, setPass] = useState('');
 
   const [answer, setAnswer] = useState({});
-
-
   const router = useNavigate();
 
   const [fetching, isLoading, error] = useFetching(async () => {
 
-    const resulte = await usePostQueryRegister(Login, Pass);
-
-
+    const resulte = await usePostQueryRegister(RegistrationInfo.userName, RegistrationInfo.Pass);
     setAnswer(resulte)
-
 
   })
   if (answer.username) {
@@ -35,34 +37,6 @@ const Register_Validator = () => {
 
   }
 
-  RegisterInput.default[0].curentValue=Login;
-  RegisterInput.default[0].functionValue=setLogin;
-
-  RegisterInput.default[1].curentValue=Pass;
-  RegisterInput.default[1].functionValue=setPass;
-
-
-
-  // Все инпуты
-  const Register = [
-    {
-      nameInput: 'Username',
-      type: 'text',
-      placeholder: 'Введите любой логин',
-      name: 'login',
-      curentValue: Login,
-      functionValue: setLogin
-    },
-    {
-      nameInput: 'Password',
-      type: 'password',
-      placeholder: 'Введите любой пароль',
-      name: 'pass',
-      curentValue: Pass,
-      functionValue: setPass
-    }
-
-  ]
 
   function TimeAttention() {
     setCheck(true);
@@ -91,11 +65,21 @@ const Register_Validator = () => {
           <Link className={classes.btn_reading} to={'/register'} >Sign Up</Link>
         </div>
         <span className={classes.DataEntry}>Register</span>
-        {Register.map((value) => (
+        {RegisterInput.default.map((value) => (
           <ModalInput
             value={value}
             check={check}
             key={value.name}
+            inputValue={RegistrationInfo[value.name]}
+            onchange={(event) => {
+          
+              setRegistrationInfo(prevState => ({
+
+              ...prevState
+              ,
+              
+               [value.name]: event
+            }))}}
           >
           </ModalInput>
 
@@ -112,14 +96,14 @@ const Register_Validator = () => {
         >
           <span
           >
-            Возможно,Вы уже зарегестрированы
+          You may have already registered
           </span></div>
         <button
           className={classes.NextPage}
           type="submit"
           onClick={(event) => {
             event.preventDefault();
-            !!Login.trim() && !!Pass.trim()
+            !!RegistrationInfo.userName.trim() && !!RegistrationInfo.Pass.trim()
               ?
               fetching()
 
@@ -128,6 +112,11 @@ const Register_Validator = () => {
         >
           Execute
         </button>
+
+        {/* <ButtonQuery
+        fetching={fetching}
+        
+        >Execute</ButtonQuery> */}
 
 
       </form>

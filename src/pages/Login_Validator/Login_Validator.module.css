@@ -44,41 +44,17 @@
     font-weight: 700;
     box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.8);
   }
-  
-  .commonInp{
-    display: flex;
-    flex-wrap:wrap;
-    margin-top:0px;
-    margin-bottom:50px;
-    box-sizing:border-box;
-    width:90%;
-    height:90px;
+  .error, .error_active{
+
+    display: none;
+   
+    font-weight: 800;
   }
-    .inpPlusFig{
-        width:100%;
-        display: flex;
-        position:relative;
-        flex-wrap:wrap;
-        height:60%;
-    }
-        .log, .pass, .logAttent, .passAttent {
-            width:100%;
-            height:80%;
-            margin:0px;
-            padding: 0px;
-            border-radius: 3px;
-            border-style:groove;
-            border-color:gray;
-            border-style:double;
-            box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.8);
-          }
-          .logAttent, .passAttent {
-            border: 3px red solid;
-          }
-          .nameInput{
-            font-weight: 800;
-  
-          }
+  .error_active{
+  color:  red;
+    display: flex;
+  }
+ 
   
   
           @media (max-width: 450px) {

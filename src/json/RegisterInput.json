@@ -3,14 +3,16 @@
       "nameInput": "Username",
       "type": "text",
       "placeholder": "Введите любой логин",
-      "name": "login"
+      "name": "userName",
+      "required":"necessarily"
      
     },
     {
         "nameInput": "Password",
         "type":"password",
         "placeholder": "Введите любой пароль",
-        "name": "pass"
+        "name": "Pass",
+        "required":"necessarily"
      
     }
 

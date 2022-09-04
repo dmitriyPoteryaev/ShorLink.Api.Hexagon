@@ -1,86 +1,94 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import classes from "./Login_Validator.module.css";
-import ModalInput from '../../components/UI/ModalInput/ModalInput'
-import { usePostQueryLogin } from "../../customHooks/usePostQueryLogin.js";
+import ModalInput from "../../components/UI/ModalInput/ModalInput";
+import { usePostQueryLogin } from "../../API/PostQuery/usePostQueryLogin.js";
 import { useFetching } from "../../customHooks/useFetching.js";
-import * as LoginInput from '../../json/LoginInput.json'
+import * as LoginInput from "../../json/LoginInput.json";
+import { useNavigate } from "react-router-dom";
+import ButtonQuery from "../../components/UI/ButtonQuery/ButtonQuery";
 
 const Login_Validator = () => {
+  const [userDate, setUserDate] = useState({
+    userName: "",
+    Grant_Type: "",
+    client_id: "",
+    Pass: "",
+    Scope: "",
+    client_secret: "",
+  });
   const [answer, setAnswer] = useState({});
 
+  const [check, setCheck] = useState(false);
 
- 
-  const [userName,setUsername] = useState('');
-  const [Grant_Type,setGrant_Type] = useState('');
-  const [client_id,setClient_id] = useState('');
-  const [Pass,setPass] = useState('');
-  const [Scope,setScope] = useState('');
-  const [client_secret,setClient_secret] = useState('');
+  function TimeAttention() {
+    setCheck(true);
 
-  
-
-  const [fetching, isLoading, error] = useFetching(async () => {
-
-    const resulte = await usePostQueryLogin(Grant_Type, userName, Pass, client_secret, client_id);
-
-    console.log(resulte)
-    setAnswer(resulte)
-
-  })
-  if (answer.access_token && answer.token_type) {
-    console.log('Всё прошло')
-    router('/login')
-
+    setTimeout(() => {
+      setCheck(false);
+    }, 3000);
   }
 
- 
-    LoginInput.default[0].curentValue = Grant_Type;
-    LoginInput.default[0].functionValue = setGrant_Type;
+  const [fetching, isLoading, error] = useFetching(async () => {
+    const resulte = await usePostQueryLogin(
+      userDate.Grant_Type,
+      userDate.userName,
+      userDate.Pass,
+      userDate.client_secret,
+      userDate.client_id
+    );
 
-    
-    LoginInput.default[1].curentValue = userName;
-    LoginInput.default[1].functionValue = setUsername;
+    console.log(resulte);
+    setAnswer(resulte);
+  });
 
-    
-    LoginInput.default[2].curentValue = Pass;
-    LoginInput.default[2].functionValue = setPass;
+  const router = useNavigate();
+  if (answer.access_token && answer.token_type) {
+    console.log("Всё прошло");
 
-    
-    LoginInput.default[3].curentValue = Scope;
-    LoginInput.default[3].functionValue = setScope;
-
-    
-    LoginInput.default[4].curentValue = client_id;
-    LoginInput.default[4].functionValue = setClient_id;
-
-    LoginInput.default[5].curentValue = client_secret;
-    LoginInput.default[5].functionValue = setClient_secret;
-  
-
+    localStorage.setItem("access_token", answer.access_token);
+    localStorage.setItem("token_type", answer.token_type);
+    router("/UserWindow");
+  }
 
   return (
     <div className={classes.Login}>
-      <div className={classes.form}>
+      <form className={classes.form} action="#">
         <span className={classes.DataEntry}>Login</span>
         {LoginInput.default.map((value) => (
           <ModalInput
             value={value}
             key={value.name}
-          // check={check}
+            userDate={userDate}
+            inputValue={userDate[value.name]}
+            onchange={(event) => {
+              setUserDate((prevState) => ({
+                ...prevState,
+                [value.name]: event,
+              }));
+            }}
+            check={check}
+          ></ModalInput>
+        ))}
+        <div
+          className={
+            error
+              ?
+              classes.error_active
+              :
+              classes.error
+          }
+        >
+          <span
           >
-          </ModalInput>
-
-        )
-        )}
-
-
-        <button
+          Something went wrong
+          </span></div>
+               <button
           className={classes.NextPage}
           type="submit"
           onClick={(event) => {
             event.preventDefault();
-            !!userName.trim() && !!Pass.trim()
+            !!userDate.userName.trim() && !!userDate.Pass.trim()
               ?
               fetching()
 
@@ -89,9 +97,15 @@ const Login_Validator = () => {
         >
           Execute
         </button>
-      </div>
 
-
+        {/* <ButtonQuery
+          value={userDate}
+          fetching={fetching}
+          TimeAttention={TimeAttention}
+        >
+          Execute
+        </ButtonQuery> */}
+      </form>
     </div>
   );
 };
