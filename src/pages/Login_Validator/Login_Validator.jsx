@@ -48,7 +48,7 @@ const Login_Validator = () => {
 
     localStorage.setItem("access_token", answer.access_token);
     localStorage.setItem("token_type", answer.token_type);
-    router("/UserWindow");
+    router("/UserWindow/1");
   }
 
   return (

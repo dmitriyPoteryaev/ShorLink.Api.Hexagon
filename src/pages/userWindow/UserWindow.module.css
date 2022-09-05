@@ -83,28 +83,7 @@
           color:  red;
             display: flex;
           }
-          .table{
-           
-            border: 1px solid grey;
-            margin: 0 auto;
-            
-          }
-          .tr{
-            border: 1px solid grey;
-    
-       
-       
       
-          }
-          .th {
-        
-            
-           height:100px;
-            border: 1px solid grey;
-         
-            
-            
-          }
           .Link{
             color:  red;
             font-weight: 800;
@@ -119,7 +98,14 @@
 
             display: none;
           }
-  
+         .table-responsive{
+          word-break: break-all;
+          overflow-wrap: break-word;
+
+         }
+         .th{
+        height: 300px;
+         }
 
           @media (max-width: 600px) {
              .NextPage{

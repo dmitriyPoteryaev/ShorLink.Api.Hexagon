@@ -15,7 +15,7 @@ function App() {
 
        <Route path="/register" element={<Register_Validator/>} />
        <Route path="/login" element={<Login_Validator/>} />
-       <Route path="/UserWindow" element={<UserWindow/>} />
+       <Route path="/UserWindow/:pages" element={<UserWindow/>} />
        
        <Route path="*" element={<Register_Validator />} />
      </Routes>

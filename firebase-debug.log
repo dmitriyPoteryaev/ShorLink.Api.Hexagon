@@ -1,0 +1,40 @@
+[debug] [2022-09-05T20:42:30.727Z] ----------------------------------------------------------------------
+[debug] [2022-09-05T20:42:30.731Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\foreg\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2022-09-05T20:42:30.732Z] CLI Version:   11.8.0
+[debug] [2022-09-05T20:42:30.733Z] Platform:      win32
+[debug] [2022-09-05T20:42:30.733Z] Node Version:  v16.17.0
+[debug] [2022-09-05T20:42:30.735Z] Time:          Mon Sep 05 2022 23:42:30 GMT+0300 (Москва, стандартное время)
+[debug] [2022-09-05T20:42:30.735Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-09-05T20:42:31.105Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-09-05T20:42:31.106Z] > authorizing via signed-in user (foregonetomb654@gmail.com)
+[debug] [2022-09-05T20:42:31.106Z] [iam] checking project test-hexagon for permissions ["firebase.projects.get"]
+[debug] [2022-09-05T20:42:31.107Z] > refreshing access token with scopes: []
+[debug] [2022-09-05T20:42:31.109Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-09-05T20:42:31.110Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-09-05T20:42:31.452Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2022-09-05T20:42:31.453Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-09-05T20:42:31.502Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/test-hexagon:testIamPermissions [none]
+[debug] [2022-09-05T20:42:31.502Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/test-hexagon:testIamPermissions x-goog-quota-user=projects/test-hexagon
+[debug] [2022-09-05T20:42:31.503Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/test-hexagon:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2022-09-05T20:42:32.344Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/test-hexagon:testIamPermissions 200
+[debug] [2022-09-05T20:42:32.344Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/test-hexagon:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2022-09-05T20:42:32.345Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/test-hexagon [none]
+[debug] [2022-09-05T20:42:32.666Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/test-hexagon 200
+[debug] [2022-09-05T20:42:32.666Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/test-hexagon {"projectId":"test-hexagon","projectNumber":"720323892648","displayName":"Test-Hexagon","name":"projects/test-hexagon","resources":{"hostingSite":"test-hexagon"},"state":"ACTIVE","etag":"1_daa22b9f-51a3-4cb7-9fa9-cddc6c616c7f"}
+[info] 
+[info] === Serving from 'C:\Users\foreg\OneDrive\Рабочий стол\test'...
+[info] 
+[debug] [2022-09-05T20:42:32.672Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/test-hexagon/sites 
+[debug] [2022-09-05T20:42:33.752Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/test-hexagon/sites 200
+[debug] [2022-09-05T20:42:33.752Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/test-hexagon/sites {"sites":[{"name":"projects/test-hexagon/sites/test-hexagon","defaultUrl":"https://test-hexagon.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2022-09-05T20:42:33.752Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/test-hexagon/webApps/-/config [none]
+[debug] [2022-09-05T20:42:34.369Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/test-hexagon/webApps/-/config 200
+[debug] [2022-09-05T20:42:34.369Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/test-hexagon/webApps/-/config {"projectId":"test-hexagon","storageBucket":"test-hexagon.appspot.com","apiKey":"AIzaSyACm6x-9GC-6cx-ApK5vysoj8NOnLUOxDI","authDomain":"test-hexagon.firebaseapp.com","messagingSenderId":"720323892648"}
+[info] i  hosting: Serving hosting files from: public {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mpublic\u001b[22m"}}
+[info] +  hosting: Local server: http://localhost:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://localhost:5000\u001b[22m\u001b[24m"}}
+[info] i  hosting: 127.0.0.1 - - [05/Sep/2022:20:42:44 +0000] "GET / HTTP/1.1" 200 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [05/Sep/2022:20:42:44 +0000] \"GET / HTTP/1.1\" 200 - \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [05/Sep/2022:20:42:44 +0000] "GET /main.6aa92bc646af2472a6ba.js HTTP/1.1" 200 - "http://localhost:5000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [05/Sep/2022:20:42:44 +0000] \"GET /main.6aa92bc646af2472a6ba.js HTTP/1.1\" 200 - \"http://localhost:5000/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [05/Sep/2022:20:42:44 +0000] "GET /main.35d3c3fed2986b65f6ff.css HTTP/1.1" 200 - "http://localhost:5000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [05/Sep/2022:20:42:44 +0000] \"GET /main.35d3c3fed2986b65f6ff.css HTTP/1.1\" 200 - \"http://localhost:5000/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [05/Sep/2022:20:42:45 +0000] "GET /favicon.ico HTTP/1.1" 200 - "http://localhost:5000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [05/Sep/2022:20:42:45 +0000] \"GET /favicon.ico HTTP/1.1\" 200 - \"http://localhost:5000/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36\""}}
+[info] i  hosting: 127.0.0.1 - - [05/Sep/2022:20:43:04 +0000] "GET /favicon.ico HTTP/1.1" 304 - "http://localhost:5000/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [05/Sep/2022:20:43:04 +0000] \"GET /favicon.ico HTTP/1.1\" 304 - \"http://localhost:5000/login\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36\""}}
