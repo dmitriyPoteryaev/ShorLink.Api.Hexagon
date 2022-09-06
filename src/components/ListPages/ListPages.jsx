@@ -1,35 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Route, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import classes from "./ListPages.module.css";
 
-
-const ListPages = ({answer}) => {
+const ListPages = ({ answer, DataPage }) => {
   const params = useParams();
 
- let TotalPages=[];
+  let TotalPages = [];
 
-for(let i=0;i<Math.ceil(answer.length/10);i++){
+  for (let i = 0; i < Math.ceil(answer.length / 10); i++) {
+    TotalPages.push(i + 1);
+  }
 
-  TotalPages.push(i+1)
-
-
-}
-
-const [bordTotalPages, setbordTotalPages] = useState([]);
-console.log(TotalPages)
-console.log('Bord',bordTotalPages)
-console.log('Bord',params.pages)
- 
+  const [bordTotalPages, setbordTotalPages] = useState([]);
 
   useEffect(() => {
-    TotalPages.length<=5
-   
-    ?
-    setbordTotalPages(TotalPages)
-      :
-
-    params.pages == 1
+    TotalPages.length <= 5
+      ? setbordTotalPages(TotalPages)
+      : params.pages == 1
       ? setbordTotalPages(
           TotalPages.filter((elem) => elem <= +params.pages + 5)
         )
@@ -41,33 +29,36 @@ console.log('Bord',params.pages)
         )
       : setbordTotalPages(
           TotalPages.filter(
-            (elem) =>
-              elem >= +params.pages && elem <= +params.pages + 5
+            (elem) => elem >= +params.pages && elem <= +params.pages + 5
           )
         );
   }, [answer]);
-
-
 
   return (
     <div className={classes.BlockPages}>
       <Link
         className={classes.Prev}
         to={`/UserWindow/${
-          +params.pages == 1
-            ? (params.pages = 1)
-            : +params.pages - 1
+          +params.pages == 1 ? (params.pages = 1) : +params.pages - 1
         }`}
       >
         Previous
       </Link>
       {bordTotalPages.map((pages) =>
         params.pages == pages ? (
-          <Link className={classes.PageActive} key={pages} to={`/UserWindow/${pages}`}>
+          <Link
+            className={classes.PageActive}
+            key={pages}
+            to={`/UserWindow/${pages}`}
+          >
             {pages}
           </Link>
         ) : (
-          <Link className={classes.Page} key={pages} to={`/UserWindow/${pages}`}>
+          <Link
+            className={classes.Page}
+            key={pages}
+            to={`/UserWindow/${pages}`}
+          >
             {pages}
           </Link>
         )

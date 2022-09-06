@@ -1,56 +1,42 @@
-
 import React, { useState, useEffect } from "react";
 import { useGetQuery } from "../../API/GetQuery/useGetQuery.js";
 import { usePostLink } from "../../API/PostQuery/usePostLink.js";
 import { useFetching } from "../../customHooks/useFetching.js";
 import classes from "./UserWindow.module.css";
-import ModalInput from '../../components/UI/ModalInput/ModalInput';
-import ListPages from '../../components/ListPages/ListPages.jsx';
-import {useSortingContent} from '../../customHooks/useSortingContent.js';
-import * as UserInput from '../../json/UserInput.json'
+import ModalInput from "../../components/UI/ModalInput/ModalInput";
+import ListPages from "../../components/ListPages/ListPages.jsx";
+import { useSortingContent } from "../../customHooks/useSortingContent.js";
+import * as UserInput from "../../json/UserInput.json";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Loader from "../../components/UI/Loader/Loader";
+import ButtonQuery from "../../components/UI/ButtonQuery/ButtonQuery";
+
 const UserWindow = () => {
-
-  const [answer,setAnswer] = useState([]);
+  const [answer, setAnswer] = useState([]);
   const [check, setCheck] = useState(false);
-  const [shortLink, setShortLink] = useState('');
+  const [shortLink, setShortLink] = useState("");
+  const [filter, setFilter] = useState("");
 
-  const [DataPage, setDataPage]= useState({
-    Link:'',
-    offset: 0,
-    limit:0
-  })
+  const [DataPage, setDataPage] = useState({
+    Link: "",
+    offset: "0",
+    limit: "0",
+  });
 
-  console.log(DataPage.Link)
-  console.log('Твой результат',shortLink)
+  const router = useNavigate();
 
-  async function someFunction(name){
-    console.log(name)
-  const resulte    = await usePostLink(name,localStorage.getItem('token_type'),localStorage.getItem('access_token'))
-  setShortLink(resulte.short)
-  setDataPage({...DataPage,
-    Link:''})
-
- }
- const params = useParams();
- const Content = useSortingContent(answer);
+  const params = useParams();
+  const Content = useSortingContent(answer, filter);
   const [fetching, isLoading, error] = useFetching(async () => {
-
-
-
-
-    
-    const     resulte = await useGetQuery(DataPage.offset,DataPage.limit, localStorage.getItem('access_token'),  localStorage.getItem('token_type'));
-        setAnswer(resulte)
-    
-
-
-  })
- 
-
-
-  console.log('Фильтрация', answer.filter((elem,i)=> i>=(params.pages-1)*10&&i<=((params.pages-1)*10)+9)) 
-
+    const resulte = await useGetQuery(
+      DataPage.offset,
+      DataPage.limit,
+      localStorage.getItem("access_token"),
+      localStorage.getItem("token_type")
+    );
+    setAnswer(resulte.map((elem, i) => ({ ...elem, number: i + 1 })));
+  });
 
   function TimeAttention() {
     setCheck(true);
@@ -59,108 +45,129 @@ const UserWindow = () => {
       setCheck(false);
     }, 3000);
   }
-    console.log(answer.reverse())
 
   useEffect(() => {
-    fetching()
+    fetching();
   }, [params.pages]);
 
-    return (
-      <div className={classes.UserWindow}>
-      <div className={classes.form}>
+  async function GetShortUrl() {
+    const res = await usePostLink(
+      DataPage.Link,
+      localStorage.getItem("token_type"),
+      localStorage.getItem("access_token")
+    );
 
-        <span className={classes.DataEntry}>Your Account</span>
-        <div className={
-           shortLink
-           ?
-           classes.Link
-           :
-          classes.NoLink
-          }>
-          http://79.143.31.216/s/{shortLink}</div>
-        {UserInput.default.map((value,i) => (
-           <div  className={classes.BtnPlusInp}>
-          <ModalInput
-            value={value}
-            check={check}
-            key={value.name}
-            inputValue={DataPage[value.name]}
-            onchange={(event) => {
-          
-              setDataPage(prevState => ({
+    res.short ? setShortLink(res.short) : setShortLink(`${res}`);
 
-              ...prevState
-              ,
-              
-               [value.name]: event
-            }))}}
-          >
-                
-          </ModalInput>
-          <button
-             className={classes.NextPage}
-             type="submit"
-             onClick={(event) => (
-              event.preventDefault(),
-              value.name==='Link'
-?
-  
-               someFunction(DataPage[value.name])
-               :
-               fetching()
+    setDataPage({ ...DataPage, Link: "" });
+  }
 
-                 
-        )}
-           >
-             Execute
-           </button>
+  return (
+    <div className={classes.UserWindow}>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className={classes.form}>
+          <div>
+            <span className={classes.DataEntry}>Your Account</span>
+            <div className={shortLink ? classes.Link : classes.NoLink}>
+              {shortLink.split("").length >= 15 ? (
+                shortLink
+              ) : (
+                <div className={classes.Linking}>
+                  http://79.143.31.216/s/{shortLink}
+                </div>
+              )}
+            </div>
+
+            <div className={error && check ? classes.Link : classes.NoLink}>
+              {error}
+            </div>
+
+            {UserInput.default.map((value, i) => (
+              <div key={value.name} className={classes.BtnPlusInp}>
+                <ModalInput
+                  value={value}
+                  check={check}
+                  key={value.name}
+                  inputValue={DataPage[value.name]}
+                  onchange={(event) => {
+                    setDataPage((prevState) => ({
+                      ...prevState,
+                      [value.name]: event,
+                    }));
+                  }}
+                ></ModalInput>
+                {value.name === "Link" ? (
+                  <ButtonQuery
+                    fetching={GetShortUrl}
+                    value={{ Link: DataPage.Link }}
+                    TimeAttention={TimeAttention}
+                  >
+                    Execute
+                  </ButtonQuery>
+                ) : (
+                  <ButtonQuery
+                    fetching={fetching}
+                    value={{
+                      offset: DataPage.offset,
+                      limit: DataPage.limit,
+                    }}
+                    TimeAttention={TimeAttention}
+                  >
+                    Execute
+                  </ButtonQuery>
+                )}
+              </div>
+            ))}
+            <ListPages answer={answer} DataPage={DataPage} />
+            <div className="table-responsive">
+              <table className="table table-hover table-bordered table-condensed ">
+                <thead>
+                  <tr>
+                    <th onClick={() => setAnswer([...answer].reverse())}></th>
+                    <th>Short</th>
+                    <th>Target</th>
+                    <th
+                      className={classes.th}
+                      onClick={() =>
+                        setFilter(filter === "counter" ? "" : "counter")
+                      }
+                    >
+                      Counter
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Content.filter(
+                    (value) =>
+                      value.number - 1 >= (params.pages - 1) * 10 &&
+                      value.number - 1 <= (params.pages - 1) * 10 + 9
+                  ).map((value) => (
+                    <tr key={value.id}>
+                      <th key={value.id}>{value.number}</th>
+                      <th
+                        key={value.short}
+                        className={classes.table_responsive}
+                      >
+                        http://79.143.31.216/s/{value.short}
+                      </th>
+                      <th
+                        key={value.target}
+                        className={classes.table_responsive}
+                      >
+                        {value.target}
+                      </th>
+                      <th key={value.counter}>{value.counter}</th>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-      
-        )
-        )}
-        <ListPages
-answer={answer}
-/>
-<div className="table-responsive">
-        <table  className="table table-hover table-bordered table-condensed ">
-          <thead>
-        <tr  >
-               <th 
-               onClick={()=>(setAnswer(answer.reverse()))}
-
-                
-               
-               
-               ></th>
-            <th>Short</th>
-            <th  >Target</th>
-            <th >Counter</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-         {answer.filter((elem,i)=> i>=(params.pages-1)*10&&i<=((params.pages-1)*10)+9).map((value,i) => (
-
-       
-          <tr key={value.id} >
-<th >{(i+1 + (params.pages-1)*10)}</th>
-<th >http://79.143.31.216/s/{value.short}</th>
-<th >{value.target}</th>
-<th >{value.counter}</th>
-          </tr>
-
-
-        )
-        )} 
-         </tbody>
-</table>
-
-</div>
-      </div>
-
-
-    </div> 
-    // <span >Ты перешёл на страницу с таблицей</span>
-    )
-  
-}
+        </div>
+      )}
+    </div>
+  );
+};
 export default UserWindow;

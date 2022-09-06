@@ -15,7 +15,7 @@ return fetch(`http://79.143.31.216/register?username=${username}&password=${pass
         ));
     }
 
-    // console.log()
+    
     // Далее будем использовать только JSON из тела ответа.
     return response.json();
 })

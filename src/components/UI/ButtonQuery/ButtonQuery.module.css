@@ -1,16 +1,22 @@
 .NextPage {
-    text-decoration: none;
-    margin: 20px 50px 20px 50px;
-    width: 100%;
-    text-align: center;
-    padding-top: 5px;
-    border-radius: 3px;
-    height: 40px;
-    cursor: pointer;
-    border:none;
-    background-color:black;
-    color:white;
-    font-size:15px;
-    font-weight: 700;
-    box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.8);
+  text-decoration: none;
+  margin: 30px 10px 20px 20px;
+  width: 30%;
+  text-align: center;
+  padding-top: 5px;
+  border-radius: 3px;
+  height: 40px;
+  cursor: pointer;
+  border: none;
+  background-color: black;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.8);
+  }
+  @media (max-width: 450px) {
+    .NextPage {
+      font-size: 10px;
+      width: 40%;
+    }
   }

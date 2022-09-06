@@ -1,4 +1,4 @@
-export const usePostQueryLogin = (grantType,username,password,cliSecret,cliId) => {
+export const usePostQueryLogin = (link) => {
 
     return fetch('http://79.143.31.216/login', {
         method: 'POST',
@@ -9,11 +9,9 @@ export const usePostQueryLogin = (grantType,username,password,cliSecret,cliId) =
         },
         body:
         
-        cliId
-        ?
-        `grant_type=${grantType}&username=${username}&password=${password}&client_id=${cliId}&client_secret=${cliSecret}`
-        :
-        `grant_type=${grantType}&username=${username}&password=${password}&client_secret=${cliSecret}`
+       
+        `${link}`
+       
 
         
 }).then(function(response) {

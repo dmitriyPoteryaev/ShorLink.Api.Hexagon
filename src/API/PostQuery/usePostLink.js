@@ -16,14 +16,14 @@
             if (!response.ok) {
                 // Сервер вернул код ответа за границами диапазона [200, 299]
                 return Promise.reject(new Error(
-                    'Response failed: ' + response.status + ' (' + response.statusText + ')'
+                    `Response failed:  ${response.status}`
                 ));
             }
         
-            // console.log()
-            // Далее будем использовать только JSON из тела ответа.
+            
             return response.json();
-        })
+        }).then((respone)=> {return respone})
+        .catch(((respone)=> {return respone}))
         
         
         

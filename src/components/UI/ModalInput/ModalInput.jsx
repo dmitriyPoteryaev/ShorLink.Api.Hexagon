@@ -4,7 +4,8 @@ import classes from "./ModalInput.module.css";
 
 
 
-function ModalInput({value,check,onchange,inputValue}) {
+function ModalInput({value,check,onchange,inputValue,changeStatus}) {
+
 
 
     return (
@@ -33,6 +34,24 @@ function ModalInput({value,check,onchange,inputValue}) {
                 onchange(event.target.value)
             }
           />
+          <div
+className={
+  value.checkbox
+    ? classes.checkbox
+    : classes.NoCheckbox
+}
+          >
+<input
+          
+          type="checkbox"
+          checked={value.StatusCheckbox}
+          onChange={(event) => 
+           {
+            changeStatus(value.name,value.StatusCheckbox)} }
+        /><span>Send empty value</span>
+
+          </div>
+          
         </div>
       </div>
 

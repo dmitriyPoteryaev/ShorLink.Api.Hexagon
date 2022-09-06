@@ -1,15 +1,7 @@
-export const useSortingContent=(somethingContent,filterSelector)=>{
-
- 
+export const useSortingContent = (somethingContent, filterSelector) => {
 
 
-    
-    return  [...somethingContent].sort(
-        (a, b) => b[filterSelector] - a[filterSelector]
-      )
-    
-
-
- 
- 
-}
+  return [...somethingContent].sort(
+    (a, b) => b[filterSelector] - a[filterSelector]
+  );
+};

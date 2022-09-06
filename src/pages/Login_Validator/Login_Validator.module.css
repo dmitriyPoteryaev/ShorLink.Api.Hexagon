@@ -1,64 +1,63 @@
 .Login {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    font-family: "PT Sans", sans-serif;
-    background-size:40%
-  
-  }
-  .form {
-    display: flex;
-    flex-wrap: wrap;
-    width: 500px;
-    height: 1050px;
-    justify-content: center;
-    align-content: center;
-    background-color:  blueviolet;
-    border-radius:6px;
-  }
-  .DataEntry{
-    margin-bottom:50px;
-    width: 500px;
-    height: 50px;
-    text-align: center;
-    font-weight: 700;
-    font-size:20px;
-    border-radius:3px;
-    padding:10px;
-  }
-  
-  .NextPage {
-    text-decoration: none;
-    margin: 30px 50px 30px 50px;
-    width: 100%;
-    text-align: center;
-    padding-top: 5px;
-    border-radius: 3px;
-    height: 40px;
-    cursor: pointer;
-    border:none;
-    background-color:black;
-    color:white;
-    font-size:15px;
-    font-weight: 700;
-    box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.8);
-  }
-  .error, .error_active{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: "PT Sans", sans-serif;
+  background-size: 40%;
+}
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  width: 500px;
+  height: 1050px;
+  justify-content: center;
+  align-content: center;
+  background-color: blueviolet;
+  border-radius: 6px;
+}
+.DataEntry {
+  margin-bottom: 50px;
+  width: 500px;
+  height: 50px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 20px;
+  border-radius: 3px;
+  padding: 10px;
+}
 
-    display: none;
-   
-    font-weight: 800;
+.NextPage {
+  text-decoration: none;
+  margin: 30px 50px 30px 50px;
+  width: 100%;
+  text-align: center;
+  padding-top: 5px;
+  border-radius: 3px;
+  height: 40px;
+  cursor: pointer;
+  border: none;
+  background-color: black;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.8);
+}
+.error,
+.error_active {
+  display: none;
+
+  font-weight: 800;
+}
+.error_active {
+  color: black;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+@media (max-width: 450px) {
+  .commonInp {
+    width: 100%;
   }
-  .error_active{
-  color:  red;
-    display: flex;
-  }
- 
-  
-  
-          @media (max-width: 450px) {
-            .commonInp{
-              width:100%;
-            }
-          }
+}

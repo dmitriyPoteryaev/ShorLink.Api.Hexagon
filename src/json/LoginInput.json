@@ -1,14 +1,16 @@
 [
     {
-      "nameInput": "Grant Type",
+      "nameInput": "grant_type",
       "type": "text",
       "placeholder":"grand type",
       "name": "Grant_Type",
-      "required":""
+      "required":"",
+      "checkbox":"necessarily",
+      "StatusCheckbox":""
      
     },
     {
-        "nameInput": "Username",
+        "nameInput": "username",
         "type": "text",
         "placeholder": "username",
         "name": "userName",
@@ -17,7 +19,7 @@
         
       },
       {
-        "nameInput": "Password",
+        "nameInput": "password",
         "type": "password",
         "placeholder": "password",
         "name": "Pass",
@@ -26,19 +28,23 @@
       },
       
     {
-        "nameInput": "Scope",
+        "nameInput": "scope",
         "type": "text",
         "placeholder": "scope",
         "name": "Scope",
-        "required":""
-        
+        "required":"",
+        "checkbox":"necessarily",
+        "StatusCheckbox":""
       },
       {
         "nameInput": "client_id",
         "type": "text",
         "placeholder": "client id",
         "name": "client_id",
-        "required":""
+        "required":"",
+        "checkbox":"necessarily",
+        "StatusCheckbox":""
+
      
       },
       {
@@ -46,7 +52,9 @@
         "type": "text",
         "placeholder": "client secret",
         "name": "client_secret",
-        "required":""
+        "required":"",
+        "checkbox":"necessarily",
+        "StatusCheckbox":""
        
       }
 

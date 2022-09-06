@@ -28,22 +28,7 @@
     padding:10px;
   }
   
-  .NextPage {
-    text-decoration: none;
-    margin: 20px 50px 20px 50px;
-    width: 100%;
-    text-align: center;
-    padding-top: 5px;
-    border-radius: 3px;
-    height: 40px;
-    cursor: pointer;
-    border:none;
-    background-color:black;
-    color:white;
-    font-size:15px;
-    font-weight: 700;
-    box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.8);
-  }
+
   
           .ready {
             /* font-family: "PT Sans", sans-serif; */
@@ -72,10 +57,13 @@
             display: none;
            
             font-weight: 800;
+           
           }
           .error_active{
           color:  red;
             display: flex;
+      justify-content: center;
+            width:100%;
           }
   
   

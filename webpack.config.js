@@ -9,12 +9,13 @@ const TerserWebpackPlugin = require("terser-webpack-plugin");
 const OptimizeCssAssetPlugin = require("css-minimizer-webpack-plugin");
 let mode = "development"
 
+let  publicPath = process.env.PUBLIC_URL || '/';
+
 if (isProd) { // Режим production, если 
   // при запуске вебпака было указано --mode=production
   mode = 'production';
+  publicPath=''
 }
-
-const publicPath = process.env.PUBLIC_URL || '/';
 
 
 
@@ -41,6 +42,8 @@ module.exports = {
       filename: "[name].[contenthash].js",
       
       path: path.resolve(__dirname, 'public'),
+    
+
       publicPath
       
       
@@ -53,6 +56,8 @@ module.exports = {
         historyApiFallback: true,
         // static: "./",
         port: 3020,
+        open:true,
+       
         //для Post-запросов, чтобы страница не перезагружалась
         // liveReload: false
       },

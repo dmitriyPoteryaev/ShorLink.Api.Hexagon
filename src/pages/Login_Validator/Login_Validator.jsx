@@ -7,17 +7,20 @@ import { useFetching } from "../../customHooks/useFetching.js";
 import * as LoginInput from "../../json/LoginInput.json";
 import { useNavigate } from "react-router-dom";
 import ButtonQuery from "../../components/UI/ButtonQuery/ButtonQuery";
+import Loader from "../../components/UI/Loader/Loader";
 
 const Login_Validator = () => {
   const [userDate, setUserDate] = useState({
-    userName: "",
     Grant_Type: "",
-    client_id: "",
+    userName: "",
     Pass: "",
     Scope: "",
+    client_id: "",
     client_secret: "",
   });
   const [answer, setAnswer] = useState({});
+
+  const [content, setContent] = useState(LoginInput.default);
 
   const [check, setCheck] = useState(false);
 
@@ -30,22 +33,25 @@ const Login_Validator = () => {
   }
 
   const [fetching, isLoading, error] = useFetching(async () => {
-    const resulte = await usePostQueryLogin(
-      userDate.Grant_Type,
-      userDate.userName,
-      userDate.Pass,
-      userDate.client_secret,
-      userDate.client_id
-    );
+    let link = "";
+    content.forEach((el, i) => {
+      Object.values(userDate)[i] || content[i].StatusCheckbox
+        ? (link = link + content[i].nameInput + "=" + userDate[el.name] + "&")
+        : "";
+    });
 
-    console.log(resulte);
+    if (link[link.length - 1] == "&") {
+      link = link.slice(0, link.length - 1);
+    }
+
+    console.log(link)
+    const resulte = await usePostQueryLogin(link);
+
     setAnswer(resulte);
   });
 
   const router = useNavigate();
   if (answer.access_token && answer.token_type) {
-    console.log("Всё прошло");
-
     localStorage.setItem("access_token", answer.access_token);
     localStorage.setItem("token_type", answer.token_type);
     router("/UserWindow/1");
@@ -53,59 +59,55 @@ const Login_Validator = () => {
 
   return (
     <div className={classes.Login}>
-      <form className={classes.form} action="#">
-        <span className={classes.DataEntry}>Login</span>
-        {LoginInput.default.map((value) => (
-          <ModalInput
-            value={value}
-            key={value.name}
-            userDate={userDate}
-            inputValue={userDate[value.name]}
-            onchange={(event) => {
-              setUserDate((prevState) => ({
-                ...prevState,
-                [value.name]: event,
-              }));
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <form className={classes.form} action="#">
+          <span className={classes.DataEntry}>Login</span>
+          {content.map((value) => (
+            <ModalInput
+              value={value}
+              key={value.name}
+              userDate={userDate}
+              changeStatus={(name, status) => {
+                setContent(
+                  content.map((el) => {
+                    if (el.name === name) {
+                      el.StatusCheckbox = !el.StatusCheckbox;
+                      if (!status) {
+                        setUserDate({ ...userDate, [name]: "" });
+                      }
+                      return el;
+                    } else return el;
+                  })
+                );
+              }}
+              inputValue={userDate[value.name]}
+              onchange={(event) => {
+                setUserDate((prevState) => ({
+                  ...prevState,
+                  [value.name]: event,
+                }));
+              }}
+              check={check}
+            ></ModalInput>
+          ))}
+          <div className={error ? classes.error_active : classes.error}>
+            <span>Something went wrong</span>
+          </div>
+
+          <ButtonQuery
+            fetching={fetching}
+            value={{
+              userName: userDate.userName,
+              Pass: userDate.Pass,
             }}
-            check={check}
-          ></ModalInput>
-        ))}
-        <div
-          className={
-            error
-              ?
-              classes.error_active
-              :
-              classes.error
-          }
-        >
-          <span
+            TimeAttention={TimeAttention}
           >
-          Something went wrong
-          </span></div>
-               <button
-          className={classes.NextPage}
-          type="submit"
-          onClick={(event) => {
-            event.preventDefault();
-            !!userDate.userName.trim() && !!userDate.Pass.trim()
-              ?
-              fetching()
-
-              : TimeAttention()
-          }}
-        >
-          Execute
-        </button>
-
-        {/* <ButtonQuery
-          value={userDate}
-          fetching={fetching}
-          TimeAttention={TimeAttention}
-        >
-          Execute
-        </ButtonQuery> */}
-      </form>
+            Execute
+          </ButtonQuery>
+        </form>
+      )}
     </div>
   );
 };
