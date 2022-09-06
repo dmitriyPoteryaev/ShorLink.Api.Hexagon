@@ -1,9 +1,13 @@
 ## Как запустить проект
 - `npm install` - устанавливаем зависимости
-'Смотрим проект в режиме development'
+
+
+## Смотрим проект в режиме development
+
+
 - `npm run start` 
 
-'Смотрим проект в режиме production'
+## Смотрим проект в режиме production
 
 - `npm run build` 
 - `npm run serve` 
