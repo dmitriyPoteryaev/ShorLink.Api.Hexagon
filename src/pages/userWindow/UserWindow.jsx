@@ -124,12 +124,16 @@ const UserWindow = () => {
             <div className="table-responsive">
               <table className="table table-hover table-bordered table-condensed ">
                 <thead>
-                  <tr>
-                    <th onClick={() => setAnswer([...answer].reverse())}></th>
-                    <th>Short</th>
-                    <th>Target</th>
+                  <tr className={classes.active} >
+                    <th 
+
+                     onClick={
+                      
+                      () => setAnswer([...answer].reverse())}></th>
+                    <th >Short</th>
+                    <th >Target</th>
                     <th
-                      className={classes.th}
+                   
                       onClick={() =>
                         setFilter(filter === "counter" ? "" : "counter")
                       }

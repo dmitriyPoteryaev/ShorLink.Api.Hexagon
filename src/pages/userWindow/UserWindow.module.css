@@ -57,6 +57,11 @@
   align-items: flex-end;
   margin-right: 10px;
 }
+.active {
+  border: black 10px solid;
+
+  cursor: pointer;
+}
 .btn_reading {
   text-decoration: none;
   font-family: "PT Sans", sans-serif;
