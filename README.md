@@ -9,5 +9,4 @@
 
 ## Смотрим проект в режиме production
 
-- `npm run build` 
-- `npm run serve` 
+- `npm run serbuild` 

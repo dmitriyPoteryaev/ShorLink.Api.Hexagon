@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "live-server public/",
     "build": "cross-env NODE_ENV=production webpack --mode production",
+    "serbuild": "npm run build && npm run serve",
     "start": "cross-env NODE_ENV=development  webpack-dev-server --mode development --open",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d public"
