@@ -15,6 +15,3 @@
 
 - `npm run start` 
 
-# Смотрим проект в режиме production
-
-- `npm run serbuild` 
