@@ -11,9 +11,7 @@ export const usePostQueryLogin = (link) => {
         
        
         `${link}`
-       
-
-        
+    
 }).then(function(response) {
     // Стоит проверить код ответа.
     if (!response.ok) {

@@ -9,42 +9,42 @@ const TerserWebpackPlugin = require("terser-webpack-plugin");
 const OptimizeCssAssetPlugin = require("css-minimizer-webpack-plugin");
 let mode = "development"
 
-let  publicPath = process.env.PUBLIC_URL || '/';
+
 
 if (isProd) { // Режим production, если 
   // при запуске вебпака было указано --mode=production
   mode = 'production';
-  publicPath=''
+
 }
+
+const target = mode==='development'?'web':'browserslist';
+const devtool = mode==='development'?'source-map':undefined;
 
 
 
 module.exports = {
   
   mode,
+  target,
+  devtool,
 
     // собираем всё в режиме разработки
    
     
     // указываем тот файл,который является входным.Т.е мы указываем путь к основному файлу,а webpack уже самостоятельно соединяет все модули
-    entry: {
- //  
- main: ['@babel/polyfill',"./src/index.jsx"]
+    entry: ['@babel/polyfill',path.resolve(__dirname, 'src', 'index.jsx')],
 
-    }
-     
-     
-    ,
-   
+ 
 
     // указываем куда нужно складывать все результаты webpack'a
     output: {
+
       filename: "[name].[contenthash].js",
       
       path: path.resolve(__dirname, 'public'),
     
 
-      publicPath
+      publicPath: '/'
       
       
     },resolve: {
@@ -54,24 +54,33 @@ module.exports = {
       devServer: {
         // чтобы не было not Get 
         historyApiFallback: true,
-        // static: "./",
+       
         port: 3020,
         open:true,
        
         //для Post-запросов, чтобы страница не перезагружалась
-        // liveReload: false
+        liveReload: false
       },
    
       plugins: [
         new HTMLWebpackPlugin({
-          template: "./index.html"
+          template: path.resolve(__dirname, 'src', 'index.html')
         }),  new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
             filename: "[name].[contenthash].css",
           })
         ],
         module: {
-            rules: [  {
+            rules: [ 
+              
+              {
+                test: /\.html$/,
+
+                use: [
+                  {
+                    loader:'html-loader',
+                  }],
+             
               test: /\.css$/,
               use: [
                 {

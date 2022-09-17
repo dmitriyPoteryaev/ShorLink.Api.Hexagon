@@ -4,13 +4,13 @@ import Register_Validator from "./pages/Register_Validator/Register_Validator.js
 import Login_Validator from "./pages/Login_Validator/Login_Validator.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "../style/style.css";
-
+import { HashRouter } from 'react-router-dom'
 
 function App() {
     return (
 
 <div className="App">
-<BrowserRouter>
+<HashRouter>
        <Routes>
 
        <Route path="/register" element={<Register_Validator/>} />
@@ -19,7 +19,7 @@ function App() {
        
        <Route path="*" element={<Register_Validator />} />
      </Routes>
-   </BrowserRouter>
+   </HashRouter>
 
  
       </div>
